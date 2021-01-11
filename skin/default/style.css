@@ -1,0 +1,93 @@
+body {
+  background-color: #F5F5F5;
+}
+.gcss-wrapper {
+  background-color: #FFF;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+.content {
+  padding: 1%;
+}
+/* header */
+header {
+  background-color: #03A9F4;
+}
+header h1 {
+  padding: 20px 10px;
+  color: #FFF;
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.2);
+}
+/* footer */
+.footer {
+  border-top: 3px solid #DDD;
+  background-color: #EEE;
+  text-align: center;
+  padding: 20px 10px;
+  color: #666;
+}
+/* menu */
+.topmenu {
+  background-color: rgba(0,0,0,0.04);
+  padding: 5px;
+}
+.topmenu > ul > li > a {
+  color: #FFF;
+}
+.topmenu > ul > li.select > a {
+  background-color: rgba(0,0,0,0.1);
+}
+.topmenu > ul > li:hover > a {
+  background-color: rgba(0,0,0,0.2);
+}
+/* guestbook */
+#guestbook .item {
+  margin-bottom: 10px;
+}
+#guestbook .reaction {
+  background-color: #EEE;
+  padding: 5px;
+  color: #666;
+  text-shadow: 1px 1px 0 #FFF;
+  margin-top: 5px;
+}
+#write_form fieldset > legend {
+  font-size: 1.3em;
+  border-bottom: 5px solid #EEE;
+}
+#write_form fieldset > legend > span {
+  background-color: #EEE;
+  padding: 5px 5px 0 5px;
+  text-shadow: 1px 1px 0 #FFF;
+  float: left;
+  border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+}
+/* chat */
+#chat_body > #chat_content {
+  display: block;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#chat_body ul {
+  list-style-type: none;
+  padding: 0;
+}
+#chat_body li {
+  border-width: 1px;
+  border-bottom-style: dashed;
+  border-color: #EEE;
+  border-color: rgba(0, 0, 0, 0.06);
+  padding: 0 5px;
+  line-height: 2em;
+}
+#chat_body li > * {
+  margin-right: 5px;
+}
+#chat_body li > .time {
+  font-size: 90%;
+  color: #DDD;
+  color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.02);
+}

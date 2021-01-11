@@ -1,0 +1,35 @@
+<article id="guestbook">
+  <h2 class="margin-bottom center">{TOPIC}</h2>
+  {LIST}
+  <footer class=splitpage>{SPLITPAGE}</footer>
+  <form id=write_form method=post autocomplete=off>
+    <fieldset>
+      <legend><span class="icon-write">เขียนสมุดเยี่ยม</span></legend>
+      <div class=item>
+        <label class="g-input icon-file"><textarea id=write_detail name=write_detail rows=3 maxlength=500 placeholder="รายละเอียด"></textarea></label>
+      </div>
+      <div class="message">กรุณาใช้ข้อความสุภาพ ไม่ส่อเสียด ให้ร้ายผู้อื่น หรือเขียนข้อความใดๆที่ผิดกฏหมาย</div>
+      <div class=item>
+        <label class="g-input icon-user"><input type=text id=write_name name=write_name maxlength=50 placeholder="ชื่อผู้เขียน"></label>
+      </div>
+    </fieldset>
+    <fieldset class=submit>
+      <input type=submit class="button large save" value="เขียนสมุดเยี่ยม">
+      <input type=hidden name=token value={TOKEN}>
+    </fieldset>
+  </form>
+</article>
+<script>
+  var patt = /delete_[0-9]+/;
+  forEach($G('guestbook').elems('a'), function () {
+    if (patt.test(this.id)) {
+      this.style.cursor = 'pointer';
+      this.onclick = function () {
+        if (confirm('คุณต้องการลบรายการนี้ ?')) {
+          send('index.php/guestbook/model/index/delete', 'id=' + this.id.replace('delete_', ''), doFormSubmit, this);
+        }
+      };
+    }
+  });
+  new GForm('write_form', '{WEBURL}index.php/guestbook/model/index/save').onsubmit(doFormSubmit);
+</script>

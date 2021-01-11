@@ -1,0 +1,49 @@
+<h2 class="margin-bottom center">Simple Chat Room</h2>
+<div id="chat_div">
+  <div id="chat_body">
+    <ul id="chat_content">
+    </ul>
+  </div>
+</div>
+<form id="chat_form" class="input-groups">
+  <label class="g-input width20 icon-user"><input type="text" id="chat_name" value="{NAME}" readonly></label>
+  <label class="g-input width70 icon-chat"><input type="text" id="chat_message" placeholder="กรอกข้อความ"></label>
+  <label class="g-input width10"><input type="submit" id="chat_submit" value="Send" class="button green wide"></label>
+</form>
+<script>
+  /* ตรวจสอบข้อความสนทนา */
+  var chat_id = 0;
+  /* อัตรา Refresh ของแชต (วินาที) */
+  var interval = 1;
+  var _getChat = function () {
+    return 'id=' + chat_id + '&name=' + encodeURIComponent($E('chat_name').value);
+  };
+  var _chat = new GAjax();
+  _chat.autoupdate('index.php/chat/model/index/get', interval, _getChat, function (xhr) {
+    var item,
+      d = new Date,
+      content = $E('chat_content'),
+      ds = xhr.responseText.toJSON();
+    if (ds) {
+      for (var prop in ds.items) {
+        item = ds.items[prop];
+        var result = '<li>';
+        result += '<span class="time">' + d.fromTime(item.create_date).format('H:I:S') + '</span>';
+        result += '<span class="user">' + item.name + '</span>';
+        result += item.message + '</li>';
+        content.appendChild(result.toDOM());
+        chat_id = parseFloat(item.create_date);
+      }
+      content.scrollTop = content.scrollHeight;
+    }
+  });
+  var chatSend = function () {
+    var q = 'message=' + encodeURIComponent($E('chat_message').value) + '&name=' + encodeURIComponent($E('chat_name').value);
+    send('index.php/chat/model/index/send', q);
+    $E('chat_message').value = '';
+    $E('chat_message').focus();
+    return false;
+  };
+  /* ปุ่มส่ง */
+  $E('chat_form').onsubmit = chatSend;
+</script>
